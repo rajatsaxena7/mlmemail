@@ -102,7 +102,7 @@ const createUserEmail = (username, useremail, password) => {
                 <h1>WELCOME ABOARD!</h1>
                 <p>We are thrilled to have you join the SAICART App!</p>
                 <p>We’ll be in touch</p>
-                <a href="https://p-w-d-project-uszovs.flutterflow.app/" class="cta-button">Visit SAICART App</a>
+                <a href="https://saiwealth.co.in/" class="cta-button">Visit SAICART App</a>
             </div>
             <div class="account-details">
                 <p>Dear <strong>${username}</strong>,</p>
