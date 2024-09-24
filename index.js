@@ -5,7 +5,13 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors()); // Use CORS middleware to handle CORS
+const corsOptions = {
+  origin: "https://saiwealth.co.in", // Specify your domain here
+  methods: "POST",
+  allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOptions));// Use CORS middleware to handle CORS
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
