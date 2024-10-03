@@ -179,7 +179,7 @@ app.post("/create_account", async (req, res) => {
       useradded: useradded, // Store as boolean
       parentuser: admin.firestore().doc(`user/${parentuser}`), // Reference to the parent user document
       role: role,
-      parentuser2;admin.firestore().doc(`user/${parentuser2}`),
+      parentuser2:admin.firestore().doc(`user/${parentuser2}`),
     };
 
     await admin
