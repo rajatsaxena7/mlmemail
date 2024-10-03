@@ -176,22 +176,42 @@ app.post("/create_account", async (req, res) => {
     });
 
     // Update user document in Firestore
-    const userDoc = {
+     const userDoc = {
       display_name: username,
       email: email,
       created_time: admin.firestore.FieldValue.serverTimestamp(),
       noofpeopleadded: noofpeopleadded,
       phone_number: phonenumber,
       useradded: useradded, // Store as boolean
-      parentuser: admin.firestore().doc(`user/${parentuser}`), // Reference to the parent user document
       role: role,
-      parentuser2:admin.firestore().doc(`user/${parentuser2}`),
-      brandpromoterref:admin.firestore().doc(`user/${brandpromoterref}`),
-      level1ref:admin.firestore().doc(`user/${level1ref}`),
-      level2ref:admin.firestore().doc(`user/${level2ref}`),
-      level3ref:admin.firestore().doc(`user/${level3ref}`),
-      level4ref:admin.firestore().doc(`user/${level4ref}`)
     };
+
+    // Handle parentuser
+    if (parentuser && parentuser.trim() !== "") {
+      userDoc.parentuser = admin.firestore().doc(`user/${parentuser.trim()}`);
+    }
+
+    // Handle parentuser2
+    if (parentuser2 && parentuser2.trim() !== "") {
+      userDoc.parentuser2 = admin.firestore().doc(`user/${parentuser2.trim()}`);
+    }
+
+    // Handle brandpromoterref
+    if (brandpromoterref && brandpromoterref.trim() !== "") {
+      userDoc.brandpromoterref = admin
+        .firestore()
+        .doc(`user/${brandpromoterref.trim()}`);
+    }
+
+    // Handle level1ref to level4ref
+    for (let i = 1; i <= 4; i++) {
+      const levelRefVar = req.body[`level${i}ref`];
+      if (levelRefVar && levelRefVar.trim() !== "") {
+        userDoc[`level${i}ref`] = admin
+          .firestore()
+          .doc(`user/${levelRefVar.trim()}`);
+      }
+    }
 
     await admin
       .firestore()
