@@ -139,6 +139,7 @@ app.post("/create_account", async (req, res) => {
     useradded, // Expecting a boolean value
     parentuser, // This should be the document ID of the parent user
     noofpeopleadded,
+    parentuser2
   } = req.body;
 
   if (
@@ -149,7 +150,8 @@ app.post("/create_account", async (req, res) => {
     !role ||
     useradded === undefined || // Check for boolean explicitly
     !parentuser ||
-    !noofpeopleadded
+    !noofpeopleadded||
+    !parentuser2
   ) {
     return res
       .status(400)
@@ -177,6 +179,7 @@ app.post("/create_account", async (req, res) => {
       useradded: useradded, // Store as boolean
       parentuser: admin.firestore().doc(`user/${parentuser}`), // Reference to the parent user document
       role: role,
+      parentuser2;admin.firestore().doc(`user/${parentuser2}`),
     };
 
     await admin
